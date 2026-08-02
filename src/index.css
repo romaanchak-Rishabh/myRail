@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import "tailwindcss";
+
+:root {
+  /* Backgrounds */
+  --color-background: #0B1120;
+  --color-surface: #111827;
+  --color-surface-elevated: #1F2937;
+
+  /* Text */
+  --color-text-primary: #F9FAFB;
+  --color-text-secondary: #CBD5E1;
+  --color-text-muted: #94A3B8;
+
+  /* Brand */
+  --color-primary: #38BDF8;
+  --color-primary-dark: #0284C7;
+
+  /* Journey Status */
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+
+  /* Railway */
+  --color-rail: #475569;
+  --color-station: #38BDF8;
+  --color-current: #22C55E;
+
+  /* Borders */
+  --color-border: #334155;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-text-primary);
+}
