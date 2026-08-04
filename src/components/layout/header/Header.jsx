@@ -13,14 +13,9 @@ function Header() {
     const {
         isAuthenticated,
         loginWithRedirect,
-        isLoading,
         logout,
         user,
     } = useAuth0();
-
-    if (isLoading) {
-        return <div>Loading...</div>;
-    }
 
     return (
         <header className="w-full bg-[var(--color-surface)] border-b border-[var(--color-border)] px-6 py-4">
