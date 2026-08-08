@@ -3,7 +3,8 @@ import conf from './config/config.js'
 import cors from "cors"
 import limiter from './middleware/rateLimiter.js';
 import errorHandler from './middleware/errorHandler.js';
-import apiHealthRoute from './routes/apiHealth.js'
+import apiHealthRoute from './routes/apiHealth.js';
+import train from './routes/getTrain.js'
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.use(cors({
 app.use(limiter)
 
 app.use('/api/health', apiHealthRoute)
+
+app.use('/api/train', train)
 
 app.use(errorHandler)
 
