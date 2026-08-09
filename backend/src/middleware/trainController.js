@@ -1,9 +1,12 @@
 import trainService from "../services/trainService.js"
 
-const trainController = (req, res, next) => {
-    const result = trainService(req.params.trainNumber)
-
-    res.json(result)
+const trainController = async (req, res, next) => {
+    try {
+        const result = await trainService(req.params.trainNumber)
+        res.json(result)
+    } catch(error){
+        next(error)
+    }
 }
 
 export default trainController
