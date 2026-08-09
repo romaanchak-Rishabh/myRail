@@ -5,6 +5,7 @@ import limiter from './middleware/rateLimiter.js';
 import errorHandler from './middleware/errorHandler.js';
 import apiHealthRoute from './routes/apiHealth.js';
 import train from './routes/getTrain.js'
+import elevation from './routes/getElevation.js'
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use(limiter)
 app.use('/api/health', apiHealthRoute)
 
 app.use('/api/train', train)
+
+app.use('/api/elevation', elevation)
 
 app.use(errorHandler)
 
