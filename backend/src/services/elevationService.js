@@ -1,29 +1,12 @@
 import ApiError from "../utils/apiErrors.js";
-import railwayStationJSON from '../data/railwayStations.json' with {type: "json"}
 import elevationProvider from "../providers/elevationProvider.js";
+import stationService from "./stationService.js";
 
 const elevationService = async (stationCodes) => {
     try {
-        const stationWithCoor = stationCodes.map((stationCode) => {
-            const station = railwayStationJSON.features.find(item => item.properties.code === stationCode);
-            if(!station) {
-                throw new ApiError(404, `Station not found: ${stationCode}`)
-            }
-            if (!station.geometry?.coordinates) {
-                throw new ApiError( 404, `Coordinates not found: ${stationCode}` );
-            }
-            
-            const [longitude, latitude] = station.geometry.coordinates;
-
-            return {
-                stationCode,
-                station: station.properties.name,
-                latitude,
-                longitude
-            };
-        })
+        const stations = stationService(stationCodes)
         
-        const result = await elevationProvider(stationWithCoor);
+        const result = await elevationProvider(stations);
         return result;
 
     } catch(error) {
