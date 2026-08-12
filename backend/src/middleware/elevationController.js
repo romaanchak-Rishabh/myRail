@@ -1,5 +1,4 @@
 import elevationService from "../services/elevationService.js";
-import ApiError from "../utils/apiErrors.js";
 
 const elevationController = async (req, res, next) => {
     try {

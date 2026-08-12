@@ -4,8 +4,9 @@ import cors from "cors"
 import limiter from './middleware/rateLimiter.js';
 import errorHandler from './middleware/errorHandler.js';
 import apiHealthRoute from './routes/apiHealth.js';
-import train from './routes/getTrain.js'
-import elevation from './routes/getElevation.js'
+import train from './routes/getTrain.js';
+import elevation from './routes/getElevation.js';
+import weather from './routes/getWeather.js';
 
 const app = express();
 
@@ -27,6 +28,8 @@ app.use('/api/health', apiHealthRoute)
 app.use('/api/train', train)
 
 app.use('/api/elevation', elevation)
+
+app.use('/api/weather', weather)
 
 app.use(errorHandler)
 
