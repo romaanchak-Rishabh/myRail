@@ -9,7 +9,7 @@ const weatherProvider = async (stations) => {
             stations.map(async (station) => {
 
                 const result = await fetch(
-                    `${conf.weatherBaseUrl}&q=${station.latitude},${station.longitude}`
+                    `${conf.weatherBaseUrl}&q=${station.latitude},${station.longitude}&aqi=yes`
                 );
 
                 if (!result.ok) {
