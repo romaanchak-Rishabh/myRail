@@ -7,6 +7,7 @@ import apiHealthRoute from './routes/apiHealth.js';
 import train from './routes/getTrain.js';
 import elevation from './routes/getElevation.js';
 import weather from './routes/getWeather.js';
+import route from './routes/getRoute.js';
 
 const app = express();
 
@@ -26,6 +27,8 @@ app.use(limiter)
 app.use('/api/health', apiHealthRoute)
 
 app.use('/api/train', train)
+
+app.use('/api/route', route)
 
 app.use('/api/elevation', elevation)
 
