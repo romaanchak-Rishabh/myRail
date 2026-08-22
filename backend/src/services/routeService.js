@@ -12,7 +12,7 @@ const routeService = async (trainNumber) => {
         }
 
         const response = await railRadarProvider(trainNumber);
-        console.log("Train Route Cache Available");
+        console.log("Train Route Cache not Available");
         cache.set(cacheKey, response, 7 * 24 * 60 * 60 * 1000);
         return response;
         
