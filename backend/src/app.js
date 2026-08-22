@@ -8,6 +8,7 @@ import train from './routes/getTrain.js';
 import elevation from './routes/getElevation.js';
 import weather from './routes/getWeather.js';
 import route from './routes/getRoute.js';
+import geography from './routes/getGeography.js'
 
 const app = express();
 
@@ -33,6 +34,8 @@ app.use('/api/route', route)
 app.use('/api/elevation', elevation)
 
 app.use('/api/weather', weather)
+
+app.use('/api/geography', geography)
 
 app.use(errorHandler)
 
