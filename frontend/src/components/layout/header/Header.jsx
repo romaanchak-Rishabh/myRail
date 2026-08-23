@@ -1,127 +1,202 @@
 import { useState } from 'react'
-import ProfileDropdown from './ProfileDropdown'
-import { ChevronUp, ChevronDown, HamburgerIcon, Moon, Sun } from 'lucide-react'
+import {
+    ChevronDown,
+    Hamburger,
+    Moon,
+} from 'lucide-react'
 import { useAuth0 } from '@auth0/auth0-react'
 
-function Header() {
+import ProfileDropdown from './ProfileDropdown'
+import Button from '../../ui/Button'
 
-    const [loggedIn, setLoggedIn] = useState(true)
+function Header() {
     const [menuOpen, setMenuOpen] = useState(false)
     const [profileOpen, setProfileOpen] = useState(false)
-    const [darkTheme, setDarkTheme] = useState(true)
 
     const {
         isAuthenticated,
         loginWithRedirect,
         logout,
         user,
-    } = useAuth0();
+    } = useAuth0()
+
+    const handleLogout = () => {
+        logout({
+            logoutParams: {
+                returnTo: window.location.origin,
+            },
+        })
+    }
+
+    const handleSignup = () => {
+        loginWithRedirect({
+            authorizationParams: {
+                screen_hint: 'signup',
+            },
+        })
+    }
 
     return (
-        <header className="w-full bg-[var(--color-surface)] border-b border-[var(--color-border)] px-6 py-4">
-
-            <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <header className="mr-header">
+            <div className="mr-header__container flex flex-row">
                 {/* Logo */}
-                <div className="text-2xl font-bold text-[var(--color-primary)]">
+                <a
+                    href="/"
+                    className="mr-header__logo"
+                    aria-label="myRail home"
+                >
                     myRail
+                </a>
+
+                {/* Desktop navigation */}
+                {isAuthenticated && (
+                    <nav className="mr-header__nav">
+                        <Button
+                            variant="ghost"
+                            size="sm"
+                        >
+                            Recent Journeys
+                        </Button>
+                    </nav>
+                )}
+
+                {/* Desktop actions */}
+                <div className="mr-header__actions">
+
+                    {/* Theme toggle */}
+                    <Button
+                        variant="ghost"
+                        size="sm"
+                        icon={
+                            <Moon
+                                size={18}
+                                strokeWidth={1.8}
+                            />
+                        }
+                        aria-label="Toggle theme"
+                    />
+
+                    {isAuthenticated ? (
+                        <div className="mr-header__profile">
+                            <Button
+                                variant="secondary"
+                                size="sm"
+                                icon={
+                                    <ChevronDown
+                                        size={16}
+                                        strokeWidth={1.8}
+                                    />
+                                }
+                                iconPosition="right"
+                                onClick={() =>
+                                    setProfileOpen(!profileOpen)
+                                }
+                                aria-expanded={profileOpen}
+                            >
+                                {user?.name || 'Profile'}
+                            </Button>
+
+                            {profileOpen && (
+                                <ProfileDropdown
+                                    user={user}
+                                    logout={handleLogout}
+                                />
+                            )}
+
+                        </div>
+                    ) : (
+                        <div className="mr-header__auth">
+                            <Button
+                                variant="ghost"
+                                size="sm"
+                                onClick={handleSignup}
+                            >
+                                Sign Up
+                            </Button>
+                            <Button
+                                variant="primary"
+                                size="sm"
+                                onClick={loginWithRedirect}
+                            >
+                                Login
+                            </Button>
+                        </div>
+                    )}
                 </div>
 
-                {/* Desktop Navigation */}
-                { isAuthenticated ? <nav className="hidden md:flex items-center gap-8">
-                    <button className="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition">
-                        Recent Journey's
-                    </button>
-                </nav> : null }
-                
-                {/* Desktop Actions */}
-                <div className="hidden md:flex items-center gap-5">
-                    {/* Theme Toggle */}
-                    <button onClick={() => setDarkTheme(!darkTheme)} className="px-4 py-2 rounded-lg bg-[var(--color-surface-elevated)] text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition">
-                        {!!darkTheme ? <Moon color='orange' /> : <Sun  color='purple'/>}
-                    </button>
-                    {
-                        isAuthenticated ? (
-                            <div className="relative">
-                                <button
-                                    onClick={() => setProfileOpen(!profileOpen)}
-                                    className="vorder border-black rounded-sm px-4 py-2"
-                                >
-                                    {user?.name} ▾
-                                </button>
-
-                                {profileOpen && (
-                                    <ProfileDropdown
-                                        user={user}
-                                        logout={() =>
-                                            logout({
-                                                logoutParams: {
-                                                    returnTo: window.location.origin,
-                                                },
-                                            })
-                                        }
-                                    />
-                                )}
-                            </div>
+                {/* Mobile menu button */}
+                <Button
+                    variant="ghost"
+                    size="sm"
+                    icon={
+                        menuOpen ? (
+                            <span>×</span>
                         ) : (
-                            <div className="flex gap-3">
-                                <button
-                                    className='border border-black rounded-sm px-4 py-2'
-                                    onClick={() =>
-                                        loginWithRedirect({
-                                            authorizationParams: {
-                                                screen_hint: "signup",
-                                            },
-                                        })
-                                    }
-                                >
-                                    Sign Up
-                                </button>
-
-                                <button onClick={loginWithRedirect} className='border border-black rounded-sm px-4 py-2'>
-                                    Login
-                                </button>
-                            </div>
+                            <Hamburger size={20} />
                         )
                     }
-                </div>
-                {/* Mobile Hamburger */}
-                <button
-                    className="md:hidden text-2xl text-[var(--color-primary)]"
                     onClick={() => setMenuOpen(!menuOpen)}
-                >
-                    <HamburgerIcon />
-                </button>
+                    className="mr-header__mobile-toggle"
+                    aria-label="Toggle navigation"
+                    aria-expanded={menuOpen}
+                />
             </div>
-            {/* Mobile Menu */}
-            {/* {
-                menuOpen && (
-                    <div className="md:hidden mt-5 border-t border-[var(--color-border)] pt-5 space-y-4">
-                        <button className="block text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]">
-                            Recent Journey's
-                        </button>
-                        <button onClick={() => setDarkTheme(!darkTheme)} className="block text-[var(--color-text-secondary)] hover:text-[var(--color-primary)]">
-                            {!!darkTheme ? <Moon color='orange' /> : <Sun  color='purple'/>}
-                        </button>
-                        {
-                            loggedIn 
-                            ?
-                            (
-                                <button className="block text-[var(--color-primary)]">
-                                    Profile
-                                </button>
-                            )
-                            :
-                            (
-                                <button className="block text-[var(--color-primary)]">
-                                    Login
-                                </button>
-                            )
+
+            {/* Mobile menu */}
+            {menuOpen && (
+                <div className="mr-header__mobile-menu">
+                    {isAuthenticated && (
+                        <Button
+                            variant="ghost"
+                            fullWidth
+                        >
+                            Recent Journeys
+                        </Button>
+                    )}
+                    <Button
+                        variant="ghost"
+                        fullWidth
+                        icon={
+                            <Moon
+                                size={18}
+                                strokeWidth={1.8}
+                            />
                         }
-                    </div>
-                )
-            } */}
+                    >
+                        Theme
+                    </Button>
+
+                    {isAuthenticated ? (
+                        <Button
+                            variant="secondary"
+                            fullWidth
+                            onClick={handleLogout}
+                        >
+                            Logout
+                        </Button>
+                    ) : (
+                        <>
+                            <Button
+                                variant="ghost"
+                                fullWidth
+                                onClick={handleSignup}
+                            >
+                                Sign Up
+                            </Button>
+
+                            <Button
+                                variant="primary"
+                                fullWidth
+                                onClick={loginWithRedirect}
+                            >
+                                Login
+                            </Button>
+                        </>
+                    )}
+                </div>
+            )}
         </header>
     )
 }
 
-export default Header
+export default Header;

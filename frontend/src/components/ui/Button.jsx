@@ -1,4 +1,4 @@
-import './ui.css'
+import './ui.css';
 
 const Button = ({
     children,

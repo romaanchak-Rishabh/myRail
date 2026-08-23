@@ -1029,3 +1029,229 @@
         animation: none;
     }
 }
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.mr-header {
+    width: 100%;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    position: relative;
+    z-index: 100;
+}
+
+.mr-header__container {
+    width: min(100% - 2rem, 1280px);
+    min-height: 72px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Logo */
+
+.mr-header__logo {
+    flex-shrink: 0;
+
+    color: var(--color-text-primary);
+    text-decoration: none;
+
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+
+    transition:
+        color 180ms ease,
+        opacity 180ms ease;
+}
+
+.mr-header__logo:hover {
+    color: var(--color-primary);
+}
+
+/* Navigation */
+
+.mr-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    margin-left: 1rem;
+}
+
+/* Right-side actions */
+
+.mr-header__actions {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.mr-header__auth {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.mr-header__profile {
+    position: relative;
+}
+
+/* Mobile toggle */
+
+.mr-header__mobile-toggle {
+    display: none;
+}
+
+/* Mobile menu */
+
+.mr-header__mobile-menu {
+    display: none;
+}
+
+
+/* =========================================================
+   RESPONSIVE HEADER
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+    .mr-header__container {
+        min-height: 64px;
+        width: min(100% - 1.5rem, 1280px);
+    }
+
+    .mr-header__nav,
+    .mr-header__actions {
+        display: none;
+    }
+
+    .mr-header__mobile-toggle {
+        display: inline-flex;
+        margin-left: auto;
+    }
+
+    .mr-header__mobile-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        padding: 1rem;
+
+        border-top: 1px solid var(--color-border);
+        background: var(--color-surface);
+    }
+}
+
+/* =========================================================
+   PROFILE DROPDOWN
+   ========================================================= */
+
+.mr-profile-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+
+    width: 220px;
+
+    background: var(--color-surface-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+
+    box-shadow: var(--shadow-lg);
+
+    overflow: hidden;
+
+    animation: mr-profile-dropdown-enter 160ms ease-out;
+}
+
+.mr-profile-dropdown__header {
+    padding: 0.875rem 1rem;
+
+    border-bottom: 1px solid var(--color-border);
+}
+
+.mr-profile-dropdown__label {
+    margin: 0 0 0.25rem;
+
+    font-size: 0.75rem;
+    line-height: 1rem;
+
+    color: var(--color-text-muted);
+}
+
+.mr-profile-dropdown__name {
+    margin: 0;
+
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 500;
+
+    color: var(--color-text-primary);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mr-profile-dropdown__item {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 0.75rem 1rem;
+
+    border: 0;
+    background: transparent;
+
+    color: var(--color-text-secondary);
+
+    font: inherit;
+    font-size: 0.875rem;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background-color 160ms ease,
+        color 160ms ease;
+}
+
+.mr-profile-dropdown__item:hover {
+    background: var(--color-surface);
+    color: var(--color-primary);
+}
+
+.mr-profile-dropdown__item:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+}
+
+.mr-profile-dropdown__item--danger {
+    color: var(--color-danger);
+}
+
+.mr-profile-dropdown__item--danger:hover {
+    background: var(--color-surface);
+    color: var(--color-danger);
+}
+
+@keyframes mr-profile-dropdown-enter {
+    from {
+        opacity: 0;
+        transform: translateY(-4px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
