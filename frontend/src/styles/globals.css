@@ -1,0 +1,247 @@
+/* =========================================================
+   myRail — Global Styles
+   Reset + document-level defaults.
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+    background: var(--mr-color-bg);
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+
+    background: var(--mr-color-bg);
+    color: var(--mr-color-text);
+
+    font-family: var(--mr-font-sans);
+    font-size: var(--mr-font-size-base);
+    font-weight: var(--mr-font-weight-normal);
+    line-height: var(--mr-line-height-normal);
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body,
+button,
+input,
+textarea,
+select {
+    font-family: inherit;
+}
+
+button,
+input,
+textarea,
+select {
+    font-size: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+img {
+    height: auto;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol {
+    margin: 0;
+}
+
+ul,
+ol {
+    padding: 0;
+    list-style: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* ---------------------------------------------------------
+   Selection
+   --------------------------------------------------------- */
+
+::selection {
+    background: var(--mr-color-primary-soft);
+    color: var(--mr-color-text);
+}
+
+/* ---------------------------------------------------------
+   Focus
+   --------------------------------------------------------- */
+
+:focus-visible {
+    outline: 2px solid var(--mr-color-primary);
+    outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------
+   Placeholder
+   --------------------------------------------------------- */
+
+::placeholder {
+    color: var(--mr-color-text-muted);
+    opacity: 1;
+}
+
+/* ---------------------------------------------------------
+   Scrollbar
+   --------------------------------------------------------- */
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--mr-color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--mr-color-border-strong);
+    border-radius: var(--mr-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--mr-color-text-subtle);
+}
+
+/* ---------------------------------------------------------
+   Typography helpers
+   --------------------------------------------------------- */
+
+.mr-heading {
+    margin: 0;
+    color: var(--mr-color-text);
+    font-weight: var(--mr-font-weight-semibold);
+    line-height: var(--mr-line-height-tight);
+    letter-spacing: -0.025em;
+}
+
+.mr-heading-xl {
+    font-size: clamp(
+        var(--mr-font-size-3xl),
+        5vw,
+        var(--mr-font-size-5xl)
+    );
+}
+
+.mr-heading-lg {
+    font-size: clamp(
+        var(--mr-font-size-2xl),
+        4vw,
+        var(--mr-font-size-4xl)
+    );
+}
+
+.mr-heading-md {
+    font-size: var(--mr-font-size-2xl);
+}
+
+.mr-heading-sm {
+    font-size: var(--mr-font-size-xl);
+}
+
+.mr-body {
+    color: var(--mr-color-text-secondary);
+}
+
+.mr-muted {
+    color: var(--mr-color-text-muted);
+}
+
+.mr-subtle {
+    color: var(--mr-color-text-subtle);
+}
+
+.mr-mono {
+    font-family: var(--mr-font-mono);
+}
+
+/* ---------------------------------------------------------
+   Application
+   --------------------------------------------------------- */
+
+.mr-app {
+    min-height: 100vh;
+    background: var(--mr-color-bg);
+    color: var(--mr-color-text);
+}
+
+.mr-container {
+    width: min(
+        calc(100% - (var(--mr-content-padding) * 2)),
+        var(--mr-content-width)
+    );
+
+    margin-inline: auto;
+}
+
+.mr-section {
+    padding-block: var(--mr-space-12);
+}
+
+/* ---------------------------------------------------------
+   Responsive
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+    .mr-section {
+        padding-block: var(--mr-space-8);
+    }
+}
+
+/* ---------------------------------------------------------
+   Accessibility
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+}

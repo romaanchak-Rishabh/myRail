@@ -1,0 +1,295 @@
+/* =========================================================
+   myRail — Animations
+   Reusable motion language.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   Keyframes
+   --------------------------------------------------------- */
+
+@keyframes mr-fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes mr-fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes mr-fade-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes mr-scale-in {
+    from {
+        opacity: 0;
+        transform: scale(0.96);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes mr-pulse {
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.55;
+    }
+}
+
+@keyframes mr-glow-pulse {
+    0%,
+    100% {
+        box-shadow: 0 0 0 rgba(94, 167, 255, 0);
+    }
+
+    50% {
+        box-shadow: 0 0 24px var(--mr-color-primary-glow);
+    }
+}
+
+@keyframes mr-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes mr-skeleton {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* ---------------------------------------------------------
+   Utility animation classes
+   --------------------------------------------------------- */
+
+.mr-animate-fade-in {
+    animation:
+        mr-fade-in
+        var(--mr-duration-normal)
+        var(--mr-ease-standard)
+        both;
+}
+
+.mr-animate-fade-up {
+    animation:
+        mr-fade-up
+        var(--mr-duration-normal)
+        var(--mr-ease-emphasized)
+        both;
+}
+
+.mr-animate-fade-down {
+    animation:
+        mr-fade-down
+        var(--mr-duration-normal)
+        var(--mr-ease-emphasized)
+        both;
+}
+
+.mr-animate-scale-in {
+    animation:
+        mr-scale-in
+        var(--mr-duration-normal)
+        var(--mr-ease-emphasized)
+        both;
+}
+
+.mr-animate-pulse {
+    animation: mr-pulse 1.8s ease-in-out infinite;
+}
+
+.mr-animate-glow {
+    animation: mr-glow-pulse 2.4s ease-in-out infinite;
+}
+
+.mr-animate-spin {
+    animation: mr-spin 0.8s linear infinite;
+}
+
+/* ---------------------------------------------------------
+   Stagger helpers
+   --------------------------------------------------------- */
+
+.mr-stagger > * {
+    animation:
+        mr-fade-up
+        var(--mr-duration-normal)
+        var(--mr-ease-emphasized)
+        both;
+}
+
+.mr-stagger > *:nth-child(1) {
+    animation-delay: 40ms;
+}
+
+.mr-stagger > *:nth-child(2) {
+    animation-delay: 80ms;
+}
+
+.mr-stagger > *:nth-child(3) {
+    animation-delay: 120ms;
+}
+
+.mr-stagger > *:nth-child(4) {
+    animation-delay: 160ms;
+}
+
+.mr-stagger > *:nth-child(5) {
+    animation-delay: 200ms;
+}
+
+.mr-stagger > *:nth-child(6) {
+    animation-delay: 240ms;
+}
+
+/* ---------------------------------------------------------
+   Skeleton
+   --------------------------------------------------------- */
+
+.mr-skeleton {
+    position: relative;
+    overflow: hidden;
+
+    background: var(--mr-color-surface-elevated);
+    border-radius: var(--mr-radius-sm);
+}
+
+.mr-skeleton::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.045),
+            transparent
+        );
+
+    transform: translateX(-100%);
+
+    animation: mr-skeleton 1.5s ease-in-out infinite;
+}
+
+/* ---------------------------------------------------------
+   Live indicator
+   --------------------------------------------------------- */
+
+.mr-live-pulse {
+    position: relative;
+}
+
+.mr-live-pulse::after {
+    content: "";
+
+    position: absolute;
+    inset: -4px;
+
+    border: 1px solid currentColor;
+    border-radius: 50%;
+
+    opacity: 0;
+
+    animation: mr-live-ring 1.8s ease-out infinite;
+}
+
+@keyframes mr-live-ring {
+    0% {
+        opacity: 0.55;
+        transform: scale(0.75);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+}
+
+/* ---------------------------------------------------------
+   Hover motion
+   --------------------------------------------------------- */
+
+.mr-hover-lift {
+    transition:
+        transform var(--mr-duration-normal) var(--mr-ease-standard),
+        box-shadow var(--mr-duration-normal) var(--mr-ease-standard);
+}
+
+.mr-hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--mr-shadow-md);
+}
+
+.mr-hover-glow {
+    transition:
+        border-color var(--mr-duration-normal) var(--mr-ease-standard),
+        box-shadow var(--mr-duration-normal) var(--mr-ease-standard);
+}
+
+.mr-hover-glow:hover {
+    border-color: var(--mr-color-primary);
+    box-shadow: 0 0 28px var(--mr-color-primary-soft);
+}
+
+/* ---------------------------------------------------------
+   Reduced motion
+   --------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .mr-animate-fade-in,
+    .mr-animate-fade-up,
+    .mr-animate-fade-down,
+    .mr-animate-scale-in,
+    .mr-animate-pulse,
+    .mr-animate-glow,
+    .mr-animate-spin,
+    .mr-stagger > *,
+    .mr-skeleton::after,
+    .mr-live-pulse::after {
+        animation: none;
+    }
+
+    .mr-hover-lift,
+    .mr-hover-glow {
+        transition: none;
+    }
+}
