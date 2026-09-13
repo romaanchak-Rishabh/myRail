@@ -1,6 +1,33 @@
+@import './components/ui/ui.css';
+@import './styles/tokens.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+}
+
+body {
+    margin: 0;
+
+    min-width: 320px;
+    min-height: 100vh;
+
+    background: var(--color-surface);
+    color: var(--color-text-primary);
+
+    font-family: var(--font-family);
+
+    transition:
+        background-color var(--transition-normal),
+        color var(--transition-normal);
+}
+
+#root {
+    min-height: 100vh;
+}
 
 :root {
   /* Backgrounds */

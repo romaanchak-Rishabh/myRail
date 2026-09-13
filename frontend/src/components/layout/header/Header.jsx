@@ -1,9 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
     ChevronDown,
     Hamburger,
     Moon,
+    Sun
 } from 'lucide-react'
+import {
+    getInitialTheme,
+    applyTheme,
+    toggleTheme
+} from '../../../utils/theme.js'
 import { useAuth0 } from '@auth0/auth0-react'
 
 import ProfileDropdown from './ProfileDropdown'
@@ -12,6 +18,11 @@ import Button from '../../ui/Button'
 function Header() {
     const [menuOpen, setMenuOpen] = useState(false)
     const [profileOpen, setProfileOpen] = useState(false)
+    const [theme, setTheme] = useState(getInitialTheme)
+
+    useEffect(() => {
+        applyTheme(theme)
+    }, [theme])
 
     const {
         isAuthenticated,
@@ -64,17 +75,18 @@ function Header() {
                 <div className="mr-header__actions">
 
                     {/* Theme toggle */}
-                    <Button
-                        variant="ghost"
-                        size="sm"
-                        icon={
-                            <Moon
-                                size={18}
-                                strokeWidth={1.8}
-                            />
-                        }
-                        aria-label="Toggle theme"
-                    />
+                    <button
+                        type="button"
+                        className="mr-theme-toggle"
+                        onClick={() => setTheme(toggleTheme(theme))}
+                        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+                    >
+                        {theme === 'dark' ? (
+                            <Moon size={18} />
+                        ) : (
+                            <Sun size={18} />
+                        )}
+                    </button>
 
                     {isAuthenticated ? (
                         <div className="mr-header__profile">
