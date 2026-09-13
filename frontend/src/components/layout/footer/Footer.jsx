@@ -1,58 +1,93 @@
 function Footer() {
     return (
-        <footer className="w-full bg-[var(--color-surface)] border-t border-[var(--color-border)] mt-auto">
-            <div className="max-w-7xl mx-auto px-8 py-10 grid grid-cols-3 gap-10">
-                {/* Logo */}
-                <div>
-                    <div className="text-2xl font-bold text-[var(--color-primary)]">
+        <footer className="mr-footer">
+
+            <div className="mr-footer__content">
+
+                {/* Brand */}
+                <div className="mr-footer__brand">
+                    <div className="mr-footer__logo">
                         myRail
                     </div>
-                    <p className="mt-3 text-[var(--color-text-muted)]">
+
+                    <p className="mr-footer__tagline">
                         Your journey. Live.
                     </p>
                 </div>
+
                 {/* Navigation */}
-                <div>
-                    <h2 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">
+                <div className="mr-footer__section">
+                    <h2 className="mr-footer__heading">
                         Navigation
                     </h2>
-                    <ul className="space-y-2 text-[var(--color-text-secondary)]">
-                        <li className="hover:text-[var(--color-primary)] cursor-pointer transition">
-                            About
+
+                    <ul className="mr-footer__links">
+                        <li>
+                            <button type="button">
+                                About
+                            </button>
                         </li>
-                        <li className="hover:text-[var(--color-primary)] cursor-pointer transition">
-                            History
+
+                        <li>
+                            <button type="button">
+                                History
+                            </button>
                         </li>
-                        <li className="hover:text-[var(--color-primary)] cursor-pointer transition">
-                            Profile
+
+                        <li>
+                            <button type="button">
+                                Profile
+                            </button>
                         </li>
                     </ul>
                 </div>
+
                 {/* Contact */}
-                <div>
-                    <h2 className="text-lg font-semibold text-[var(--color-text-primary)] mb-4">
-                        Contact
+                <div className="mr-footer__section">
+                    <h2 className="mr-footer__heading">
+                        Connect
                     </h2>
-                    <ul className="space-y-2 text-[var(--color-text-secondary)]">
-                        <li className="hover:text-[var(--color-primary)] cursor-pointer transition">
-                            Email
+
+                    <ul className="mr-footer__links">
+                        <li>
+                            <a href="mailto:your-email@example.com">
+                                Email
+                            </a>
                         </li>
-                        <li className="hover:text-[var(--color-primary)] cursor-pointer transition">
-                            Github
+
+                        <li>
+                            <a href="#" target="_blank" rel="noreferrer">
+                                GitHub
+                            </a>
                         </li>
-                        <li className="hover:text-[var(--color-primary)] cursor-pointer transition">
-                            LinkedIn
+
+                        <li>
+                            <a href="#" target="_blank" rel="noreferrer">
+                                LinkedIn
+                            </a>
                         </li>
-                        <li className="hover:text-[var(--color-primary)] cursor-pointer transition">
-                            Portfolio Website
+
+                        <li>
+                            <a href="#" target="_blank" rel="noreferrer">
+                                Portfolio
+                            </a>
                         </li>
                     </ul>
                 </div>
+
             </div>
+
             {/* Bottom */}
-            <div className="border-t border-[var(--color-border)] py-4 text-center text-sm text-[var(--color-text-muted)]">
-                © {new Date().getFullYear()} myRail. All rights reserved.
+            <div className="mr-footer__bottom">
+                <span>
+                    © {new Date().getFullYear()} myRail
+                </span>
+
+                <span>
+                    Built for better journeys.
+                </span>
             </div>
+
         </footer>
     )
 }
